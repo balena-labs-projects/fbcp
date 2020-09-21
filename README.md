@@ -22,6 +22,10 @@ fbcp-ili9341 [supports several displays](https://github.com/juj/fbcp-ili9341#whi
 
 `fbcp` is meant to be used alongside other services, so you will need to create a service in your `docker-compose.yml` file:
 
+The images are build for individual display and are found at `balenablocks/fbcp:<tag>`. `balenablocks/fbcp` itself is an image that includes support for all the above display types and the driver to be loaded is selected based on the value of the tag set to the `FBCP_DISPLAY` environment variable.
+
+### If you need support for only one display
+
 ```yml
 version: "2.1"
 
@@ -58,7 +62,20 @@ services:
       - "KIOSK=1"
 ```
 
-### Configuring HDMI and TFT display sizes
+### If you need to set the driver at runtime, use
+
+```yml
+version: "2.1"
+
+services:
+  fbcp:
+    image: balenablocks/fbcp
+    privileged: true
+```
+
+Then set the `FBCP_DISPLAY` environment variable. e.g `FBCP_DISPLAY=adafruit-hx8357d-pitft`
+
+## Configuring HDMI and TFT display sizes
 
 The following [Device Configuration](https://www.balena.io/docs/learn/manage/configuration/#configuration-variables) variables might be required for proper scaling and resolutions:
 
