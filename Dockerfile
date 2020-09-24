@@ -25,7 +25,7 @@ WORKDIR /usr/src/app/fbcp-ili9341/build
 
 RUN cmake \
     -D${TARGET}=ON \
-    -DSPI_BUS_CLOCK_DIVISOR=6 \
+    -DSPI_BUS_CLOCK_DIVISOR=30 \
     -DBACKLIGHT_CONTROL=ON \
     -DSTATISTICS=0 \
     .. \

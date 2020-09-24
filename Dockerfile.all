@@ -26,7 +26,7 @@ RUN for display in ${DISPLAYS}; \
     printf "Building for target $display";\
     cmake \
     -D${target}=ON \
-    -DSPI_BUS_CLOCK_DIVISOR=6 \
+    -DSPI_BUS_CLOCK_DIVISOR=30 \
     -DBACKLIGHT_CONTROL=ON \
     -DSTATISTICS=0 \
     .. && \
