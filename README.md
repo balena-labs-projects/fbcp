@@ -75,6 +75,22 @@ services:
 
 Then set the `FBCP_DISPLAY` environment variable. e.g `FBCP_DISPLAY=adafruit-hx8357d-pitft`
 
+### If you'd rather use the balenaOS device tree overlay drivers
+
+```yml
+version: "2.1"
+
+services:
+  fbcp:
+    image: balenablocks/fbcp:dtoverlay
+    privileged: true
+    restart: on-failure
+    labels:
+        io.balena.features.dbus: "1"
+```
+
+Then set the `BALENA_HOST_CONFIG_dtoverlay` device configuration variable. e.g `BALENA_HOST_CONFIG_dtoverlay=piscreen`
+
 ## Configuring HDMI and TFT display sizes
 
 The following [Device Configuration](https://www.balena.io/docs/learn/manage/configuration/#configuration-variables) variables might be required for proper scaling and resolutions:
