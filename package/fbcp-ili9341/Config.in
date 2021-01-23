@@ -1,0 +1,60 @@
+config BR2_PACKAGE_FBCP_ILI9341
+	bool "fbcp-ili9341"
+	depends on BR2_arm
+	depends on BR2_PACKAGE_RPI_USERLAND
+	help
+	  A blazing fast display driver for SPI-based LCD displays
+	  for Raspberry Pi A, B, 2, 3, 4 and Zero 
+
+	  https://github.com/juj/fbcp-ili9341
+
+comment "fbcp-ili9341 depends on rpi-userland"
+    depends on !BR2_PACKAGE_RPI_USERLAND
+
+config BR2_PACKAGE_FBCP_ILI9341_ADAFRUIT_HX8357D_PITFT
+	bool "adafruit-hx8357d-pitft"
+	select BR2_PACKAGE_FBCP_ILI9341
+	help
+		enable adafruit-hx8357d-pitft displays
+
+config BR2_PACKAGE_FBCP_ILI9341_ADAFRUIT_ILI9341_PITFT
+	bool "adafruit-ili9341-pitft"
+	select BR2_PACKAGE_FBCP_ILI9341
+	help
+		enable adafruit-ili9341-pitft displays
+
+config BR2_PACKAGE_FBCP_ILI9341_FREEPLAYTECH_WAVESHARE32B
+	bool "freeplaytech-waveshare32b"
+	select BR2_PACKAGE_FBCP_ILI9341
+	help
+		enable freeplaytech-waveshare32b displays
+
+config BR2_PACKAGE_FBCP_ILI9341_WAVESHARE35B_ILI9486
+	bool "waveshare35b-ili9486"
+	select BR2_PACKAGE_FBCP_ILI9341
+	help
+		enable waveshare35b-ili9486 displays
+
+config BR2_PACKAGE_FBCP_ILI9341_TONTEC_MZ61581
+	bool "tontec-mz61581"
+	select BR2_PACKAGE_FBCP_ILI9341
+	help
+		enable tontec-mz61581 displays
+
+config BR2_PACKAGE_FBCP_ILI9341_WAVESHARE_ST7789VW_HAT
+	bool "waveshare-st7789vw-hat"
+	select BR2_PACKAGE_FBCP_ILI9341
+	help
+		enable waveshare-st7789vw-hat displays
+
+config BR2_PACKAGE_FBCP_ILI9341_WAVESHARE_ST7735S_HAT
+	bool "waveshare-st7735s-hat"
+	select BR2_PACKAGE_FBCP_ILI9341
+	help
+		enable waveshare-st7735s-hat displays
+
+config BR2_PACKAGE_FBCP_ILI9341_KEDEI_V63_MPI3501
+	bool "kedei-v63-mpi3501"
+	select BR2_PACKAGE_FBCP_ILI9341
+	help
+		enable kedei-v63-mpi3501 displays

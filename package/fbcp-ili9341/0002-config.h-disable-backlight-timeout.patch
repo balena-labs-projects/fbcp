@@ -1,0 +1,26 @@
+From f71355dc5dec28300b62c9c3ec24d21f6a0db7bc Mon Sep 17 00:00:00 2001
+From: Kyle Harding <kyle@balena.io>
+Date: Fri, 19 Feb 2021 13:50:46 -0500
+Subject: [PATCH 2/2] config.h: disable backlight timeout
+
+Signed-off-by: Kyle Harding <kyle@balena.io>
+---
+ config.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config.h b/config.h
+index afa2104..27ff7f4 100644
+--- a/config.h
++++ b/config.h
+@@ -209,7 +209,7 @@
+ #define KEYBOARD_INPUT_FILE "/dev/input/event1"
+ 
+ // If enabled, the display backlight will be turned off after this many usecs of no activity on screen.
+-#define TURN_DISPLAY_OFF_AFTER_USECS_OF_INACTIVITY (1 * 60 * 1000000)
++// #define TURN_DISPLAY_OFF_AFTER_USECS_OF_INACTIVITY (1 * 60 * 1000000)
+ 
+ #endif
+ 
+-- 
+2.27.0
+

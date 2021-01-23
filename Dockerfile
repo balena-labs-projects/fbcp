@@ -1,46 +1,51 @@
-FROM balenalib/rpi-python:build AS builder
+#syntax=docker/dockerfile:1.2
 
-ARG TARGET
+FROM klutchell/buildroot-base:2020.11 as build
 
-WORKDIR /usr/src/app
+# copy common config
+COPY config/common.cfg ./.config
 
+# build common packages first to make best use of layer caching
+# hadolint ignore=SC2215
+RUN --mount=type=cache,target=/cache,uid=1000,gid=1000,sharing=private \
+    make olddefconfig && make source && make
 
+# copy custom packages
+COPY package/ package/
 
-RUN install_packages cmake libraspberrypi-dev git rsync binutils
+# add custom packages to package config
+RUN echo "source package/fbcp-ili9341/Config.in" >> package/Config.in && \
+    echo "source package/rpi-fbcp/Config.in" >> package/Config.in
 
-RUN pip install git+https://github.com/larsks/dockerize
+# default to the legacy rpi-fbcp driver
+ARG FBCP_DISPLAY=dtoverlay
 
-RUN git clone https://github.com/juj/fbcp-ili9341.git
+# copy selected display config
+COPY config/$FBCP_DISPLAY.cfg ./
 
-WORKDIR /usr/src/app/fbcp-ili9341
+# merge common config with selected display config
+RUN support/kconfig/merge_config.sh -m .config $FBCP_DISPLAY.cfg
 
-RUN sed -i '212 s/^/\/\//' config.h
+# build display packages, this should be quick and not rebuild common stuff
+# hadolint ignore=SC2215
+RUN --mount=type=cache,target=/cache,uid=1000,gid=1000,sharing=private \
+    make olddefconfig && make source && make
 
-RUN sed -i '$d' CMakeLists.txt
+# hadolint ignore=DL3002
+USER root
 
-RUN echo "target_link_libraries(fbcp-ili9341 pthread bcm_host vchiq_arm vcos atomic)" >> CMakeLists.txt
+WORKDIR /rootfs
 
+# extract the rootfs so we can just COPY in future layers
+RUN tar xpf /home/br-user/output/images/rootfs.tar -C /rootfs
 
-WORKDIR /usr/src/app/fbcp-ili9341/build
-
-RUN cmake \
-    -D${TARGET}=ON \
-    -DSPI_BUS_CLOCK_DIVISOR=30 \
-    -DBACKLIGHT_CONTROL=ON \
-    -DSTATISTICS=0 \
-    .. \
-    && make -j
-
-RUN cp /usr/src/app/fbcp-ili9341/build/fbcp-ili9341 /usr/src/fbcp
-
-
-WORKDIR /usr/src/app/output
-
-RUN dockerize -n --verbose -o /usr/src/app/output/  /usr/src/fbcp
-
+# rename fbcp binary and replace with symlink
+# this makes it easier to flatten multiple images into one in Dockerfile.all
+RUN mv /rootfs/usr/bin/fbcp /rootfs/usr/bin/fbcp-$FBCP_DISPLAY && \
+    ln -sf fbcp-$FBCP_DISPLAY /rootfs/usr/bin/fbcp
 
 FROM scratch
 
-COPY --from=builder /usr/src/app/output/ ./
+COPY --from=build rootfs/ /
 
-CMD ["/usr/src/fbcp"]
+CMD [ "/usr/bin/fbcp" ]

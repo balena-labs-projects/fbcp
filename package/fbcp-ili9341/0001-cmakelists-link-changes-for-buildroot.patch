@@ -1,0 +1,32 @@
+From f3fb7dacc8e3235f4fc86ebc79899869f27fe633 Mon Sep 17 00:00:00 2001
+From: Kyle Harding <kyle@balena.io>
+Date: Fri, 19 Feb 2021 13:48:28 -0500
+Subject: [PATCH 1/2] cmakelists: link changes for buildroot
+
+Signed-off-by: Kyle Harding <kyle@balena.io>
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 235c70f..de67e89 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -46,7 +46,7 @@ if (SINGLE_CORE_BOARD)
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSINGLE_CORE_BOARD=1")
+ endif()
+ 
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -marm -mabi=aapcs-linux -mhard-float -mfloat-abi=hard -mlittle-endian -mtls-dialect=gnu2 -funsafe-math-optimizations")
++# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -marm -mabi=aapcs-linux -mhard-float -mfloat-abi=hard -mlittle-endian -mtls-dialect=gnu2 -funsafe-math-optimizations")
+ 
+ option(ARMV6Z "Target a Raspberry Pi with ARMv6Z instruction set (Pi 1A, 1A+, 1B, 1B+, Zero, Zero W)" ${DEFAULT_TO_ARMV6Z})
+ if (ARMV6Z)
+@@ -265,4 +265,4 @@ endif()
+ 
+ add_executable(fbcp-ili9341 ${sourceFiles})
+ 
+-target_link_libraries(fbcp-ili9341 pthread bcm_host atomic)
++target_link_libraries(fbcp-ili9341 pthread bcm_host vchiq_arm vcos atomic vchostif)
+-- 
+2.27.0
+

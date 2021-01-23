@@ -1,0 +1,24 @@
+From 2483e4a06d2e0894884fc6ccb6840913bb7a4201 Mon Sep 17 00:00:00 2001
+From: Kyle Harding <kyle@balena.io>
+Date: Sat, 13 Feb 2021 09:05:52 -0500
+Subject: [PATCH] cmakelists: patch changes for buildroot
+
+Change-type: patch
+Signed-off-by: Kyle Harding <kyle@balena.io>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6202553..4fb998f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,4 +11,4 @@ link_directories(/opt/vc/lib)
+ 
+ add_executable(fbcp main.c)
+ 
+-target_link_libraries(fbcp bcm_host)
++target_link_libraries(fbcp pthread bcm_host vchiq_arm vcos vchostif)
+-- 
+2.27.0
+
