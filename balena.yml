@@ -1,0 +1,22 @@
+name: "fbcp"
+description: "Provides fbcp driver for using SPI-based displays on Raspberry Pis"
+type: "sw.application"
+assets:
+  repository:
+    type: "blob.asset"
+    data:
+      url: "https://github.com/balenablocks/fbcp"
+  logo:
+    type: "blob.asset"
+    data:
+      url: "https://raw.githubusercontent.com/balenablocks/fbcp/master/logo.png"
+data:
+  applicationEnvironmentVariables:
+      - FBCP_DISPLAY: ''
+  defaultDeviceType: "raspberry-pi3"
+  supportedDeviceTypes:
+      - "raspberrypi3"
+      - "raspberrypi4-64"
+      - "fincm3"
+      - "raspberry-pi"
+      - "raspberry-pi2"

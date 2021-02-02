@@ -1,0 +1,6 @@
+version: "2.1"
+
+services:
+  fbcp:
+    image: balenablocks/fbcp
+    privileged: true
