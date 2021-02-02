@@ -13,6 +13,10 @@ assets:
 data:
   applicationEnvironmentVariables:
       - FBCP_DISPLAY: ''
+      - BALENA_HOST_CONFIG_hdmi_cvt: '480 320 60 1 0 0 0'
+      - BALENA_HOST_CONFIG_hdmi_force_hotplug: 1
+      - BALENA_HOST_CONFIG_hdmi_group: 2
+      - BALENA_HOST_CONFIG_hdmi_mode: 87
   defaultDeviceType: "raspberry-pi3"
   supportedDeviceTypes:
       - "raspberrypi3"
