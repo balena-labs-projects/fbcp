@@ -1,0 +1,24 @@
+From a5bbd12e45127d58aede0f4a13406d9f0626a660 Mon Sep 17 00:00:00 2001
+From: Kyle Harding <kyle@balena.io>
+Date: Sat, 13 Feb 2021 10:43:24 -0500
+Subject: [PATCH] cmakelists: patch changes for buildroot
+
+Change-type: patch
+Signed-off-by: Kyle Harding <kyle@balena.io>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 235c70f..7704993 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -265,4 +265,4 @@ endif()
+ 
+ add_executable(fbcp-ili9341 ${sourceFiles})
+ 
+-target_link_libraries(fbcp-ili9341 pthread bcm_host atomic)
++target_link_libraries(fbcp-ili9341 pthread bcm_host atomic vchostif)
+-- 
+2.27.0
+
