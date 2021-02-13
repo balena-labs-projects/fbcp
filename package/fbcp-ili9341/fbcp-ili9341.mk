@@ -4,12 +4,6 @@
 #
 ################################################################################
 
-# TODO: apply patches from Dockerfile.all and/or this GH issue
-# https://github.com/juj/fbcp-ili9341/issues/50
-# 1. sed -i '212 s/^/\/\//' config.h
-# 2. sed -i '$d' CMakeLists.txt
-# 3. echo "target_link_libraries(fbcp-ili9341 pthread bcm_host vchiq_arm vcos atomic)" >> CMakeLists.txt
-
 FBCP_ILI9341_VERSION = 662e8db76ba16d86cf6fd09d85240adc19e62735
 FBCP_ILI9341_SITE = $(call github,juj,fbcp-ili9341,$(FBCP_ILI9341_VERSION))
 FBCP_ILI9341_LICENSE = MIT

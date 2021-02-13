@@ -1,46 +1,41 @@
-FROM balenalib/rpi-python:build AS builder
+#syntax=docker/dockerfile:1.2
 
-ARG TARGET
+FROM klutchell/buildroot-base:2020.11 as build
 
-WORKDIR /usr/src/app
+ARG FBCP_DISPLAY=adafruit-ili9341-pitft
 
+# copy custom packages
+COPY package/ package/
 
+# add custom packages to package config
+RUN echo "source package/fbcp-ili9341/Config.in" >> package/Config.in && \
+    echo "source package/rpi-fbcp/Config.in" >> package/Config.in
 
-RUN install_packages cmake libraspberrypi-dev git rsync binutils
+# copy all config files
+COPY config/ ./
 
-RUN pip install git+https://github.com/larsks/dockerize
+# merge common config with selected display config
+RUN support/kconfig/merge_config.sh -m common.cfg $FBCP_DISPLAY.cfg
 
-RUN git clone https://github.com/juj/fbcp-ili9341.git
+# download sources first as a separate run command
+# hadolint ignore=SC2215
+RUN --mount=type=cache,target=/cache,uid=1000,gid=1000,sharing=private \
+    make olddefconfig && make source
 
-WORKDIR /usr/src/app/fbcp-ili9341
+# compile packages second as a separate run command
+# hadolint ignore=SC2215
+RUN --mount=type=cache,target=/cache,uid=1000,gid=1000,sharing=private \
+    make
 
-RUN sed -i '212 s/^/\/\//' config.h
+# hadolint ignore=DL3002
+USER root
 
-RUN sed -i '$d' CMakeLists.txt
+WORKDIR /rootfs
 
-RUN echo "target_link_libraries(fbcp-ili9341 pthread bcm_host vchiq_arm vcos atomic)" >> CMakeLists.txt
-
-
-WORKDIR /usr/src/app/fbcp-ili9341/build
-
-RUN cmake \
-    -D${TARGET}=ON \
-    -DSPI_BUS_CLOCK_DIVISOR=30 \
-    -DBACKLIGHT_CONTROL=ON \
-    -DSTATISTICS=0 \
-    .. \
-    && make -j
-
-RUN cp /usr/src/app/fbcp-ili9341/build/fbcp-ili9341 /usr/src/fbcp
-
-
-WORKDIR /usr/src/app/output
-
-RUN dockerize -n --verbose -o /usr/src/app/output/  /usr/src/fbcp
-
+RUN tar xpf /home/br-user/output/images/rootfs.tar -C /rootfs
 
 FROM scratch
 
-COPY --from=builder /usr/src/app/output/ ./
+COPY --from=build rootfs/ /
 
-CMD ["/usr/src/fbcp"]
+CMD [ "/usr/bin/fbcp" ]
