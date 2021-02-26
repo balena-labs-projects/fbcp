@@ -1,8 +1,8 @@
-FROM balenalib/raspberrypi3-python:build AS builder
+FROM balenalib/rpi-python:build AS builder
 
 WORKDIR /usr/src/
 
-RUN install_packages cmake libraspberrypi-dev git rsync binutils busybox-static
+RUN install_packages cmake libraspberrypi-dev git rsync binutils
 
 RUN git clone https://github.com/tasanakorn/rpi-fbcp.git
 
@@ -56,16 +56,14 @@ WORKDIR /rootfs
 
 RUN pip install git+https://github.com/larsks/dockerize
 
-RUN dockerize -n --verbose -o /rootfs/ /usr/bin/fbcp-* /bin/busybox
+RUN dockerize -n --verbose -o /rootfs/ /usr/bin/fbcp-*
 
 RUN rm /rootfs/Dockerfile
 
-FROM scratch
+FROM arm32v5/busybox
 
 COPY --from=builder /rootfs/ /
 
 COPY start.sh ./
 
-SHELL ["/bin/busybox","sh"]
-
-CMD ["/bin/busybox","sh","start.sh"]
+CMD ["./start.sh"]
