@@ -4,7 +4,7 @@ Provides `fbcp` driver for SPI based displays for Raspberry Pis via [fbcp-ili934
 
 ## Supported Displays
 
-fbcp-ili9341 [supports several displays](https://github.com/juj/fbcp-ili9341#which-spi-display-should-i-buy-to-make-sure-it-works-best-with-fbcp-ili9341) but we have compiled images for
+fbcp-ili9341 [supports several displays](https://github.com/juj/fbcp-ili9341#which-spi-display-should-i-buy-to-make-sure-it-works-best-with-fbcp-ili9341) but we have compiled controllers for
 
 | Display                                                                    | Tag                         | Tested | Tested On |
 | -------------------------------------------------------------------------- | --------------------------- | ------ | --------- |
@@ -17,25 +17,11 @@ fbcp-ili9341 [supports several displays](https://github.com/juj/fbcp-ili9341#whi
 | Waveshare 240x240, 1.3inch IPS LCD display HAT for Raspberry Pi (ST7789VW) | `waveshare-st7789vw-hat`    |        |           |
 | Waveshare 128x128, 1.44inch LCD display HAT for Raspberry Pi (ST7735S)     | `waveshare-st7735s-hat`     |        |           |
 | KeDei 3.5 inch SPI TFTLCD 480\*320 16bit/18bit version 6.3 2018/4/9        | `kedei-v63-mpi3501`         |        |           |
+| Generic rpi-fbcp using `BALENA_HOST_CONFIG_dtoverlay` for drivers          | `dtoverlay`                 | ✅     | 3B+       |
 
 ## Usage
 
 `fbcp` is meant to be used alongside other services, so you will need to create a service in your `docker-compose.yml` file:
-
-The images are build for individual display and are found at `balenablocks/fbcp:<tag>`. `balenablocks/fbcp` itself is an image that includes support for all the above display types and the driver to be loaded is selected based on the value of the tag set to the `FBCP_DISPLAY` environment variable.
-
-### If you need support for only one display
-
-```yml
-version: "2.1"
-
-services:
-  fbcp:
-    image: balenablocks/fbcp:<tag>
-    privileged: true
-
-... other services
-```
 
 So for example, if you are using `fbcp` with the Adafruit PiTFT - Assembled 480x320 3.5" TFT+Touchscreen along with the [dashboard](https://github.com/balenablocks/dashboard) and [browser](https://github.com/balenablocks/browser) blocks with a Raspberry Pi 3, you would use the following `docker-compose.yml` file
 
@@ -44,7 +30,7 @@ version: "2.1"
 
 services:
   fbcp:
-    image: balenablocks/fbcp:adafruit-hx8357d-pitft
+    image: balenablocks/fbcp:latest
     privileged: true
   dashboard:
     image: balenablocks/dashboard:raspberrypi3
@@ -60,17 +46,6 @@ services:
     privileged: true
     environment:
       - "KIOSK=1"
-```
-
-### If you need to set the driver at runtime, use
-
-```yml
-version: "2.1"
-
-services:
-  fbcp:
-    image: balenablocks/fbcp
-    privileged: true
 ```
 
 Then set the `FBCP_DISPLAY` environment variable. e.g `FBCP_DISPLAY=adafruit-hx8357d-pitft`
