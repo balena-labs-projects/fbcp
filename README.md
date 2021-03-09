@@ -30,7 +30,7 @@ version: "2.1"
 
 services:
   fbcp:
-    image: balenablocks/fbcp:latest
+    image: balenablocks/fbcp
     privileged: true
   dashboard:
     image: balenablocks/dashboard:raspberrypi3
@@ -49,6 +49,13 @@ services:
 ```
 
 Then set the `FBCP_DISPLAY` environment variable. e.g `FBCP_DISPLAY=adafruit-hx8357d-pitft`
+
+## ⚠️ Touch compatibility ⚠️
+
+`fbcp` block includes two drivers, namely
+
+- [tasanakorn/rpi-fbcp](https://github.com/tasanakorn/rpi-fbcp) which has touch support and is used when `FBCP_DISPLAY=dtoverlay`. You will still need to set the proper dtoverlay driver and params.
+- [juj/fbcp-ili9341](https://github.com/juj/fbcp-ili9341) which **does not** have touch support. See [here](https://github.com/juj/fbcp-ili9341#does-fbcp-ili9341-work-with-touch-displays)
 
 ## Configuring HDMI and TFT display sizes
 
