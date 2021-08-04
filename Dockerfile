@@ -52,6 +52,23 @@ RUN for display in ${DISPLAYS}; do \
         rm -rf ./* ; \
     done
 
+RUN for display in ${DISPLAYS}; do \
+        export target="$(echo "${display}" | tr - _ | tr [:lower:] [:upper:])" && \
+        echo "Building for target ${display}" && \
+        cmake \
+        -DGPIO_TFT_RESET_PIN=13 \
+        -DGPIO_TFT_DATA_CONTROL=15 \
+        -DILI9341=ON \
+        -DSPI_BUS_CLOCK_DIVISOR=30 \
+        -DBACKLIGHT_CONTROL=ON \
+        -DSTATISTICS=0 \
+        .. && \
+        make -j"$(nproc)" && \
+        mv fbcp-ili9341 "/usr/bin/fbcp-${display}" && \
+        rm -rf ./* ; \
+    done
+
+
 WORKDIR /rootfs
 
 RUN pip install git+https://github.com/larsks/dockerize
