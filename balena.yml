@@ -1,5 +1,23 @@
 name: fbcp
 description: Provides fbcp driver for using SPI-based displays on Raspberry Pis
+post-provisioning: |
+  ## Usage instructions
+  Include this snippet in your docker-compose.yml file under 'services':
+    
+    ```
+    browser:
+      image: bhcr.io/balenablocks/fbcp 
+      privileged: true 
+    ```
+  ### Configuring HDMI and TFT display sizes  
+  The following [Device Configuration](https://www.balena.io/docs/learn/manage/configuration/#configuration-variables) variables might be required for proper scaling and resolutions:
+
+  | Name                                  | Value                                                                                     |
+  | ------------------------------------- | ----------------------------------------------------------------------------------------- |
+  | BALENA_HOST_CONFIG_hdmi_cvt           | `<width> <height> <framerate> <aspect> <margins> <interlace> <rb>` e.g 480 320 60 1 0 0 0 |
+  | BALENA_HOST_CONFIG_hdmi_force_hotplug | 1                                                                                         |
+  | BALENA_HOST_CONFIG_hdmi_group         | 2                                                                                         |
+  | BALENA_HOST_CONFIG_hdmi_mode          | 87                                                                                        |
 type: sw.application
 assets:
   repository:

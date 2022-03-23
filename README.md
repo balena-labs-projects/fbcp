@@ -30,22 +30,9 @@ version: "2.1"
 
 services:
   fbcp:
-    image: balenablocks/fbcp
+    image: bhcr.io/balenablocks/fbcp
     privileged: true
-  dashboard:
-    image: balenablocks/dashboard:raspberrypi3
-    restart: always
-    network_mode: host
-    volumes:
-      - "dashboard-data:/data"
-    ports:
-      - "80"
-  browser:
-    image: balenablocks/browser:raspberrypi3
-    network_mode: host
-    privileged: true
-    environment:
-      - "KIOSK=1"
+  ...
 ```
 
 Then set the `FBCP_DISPLAY` environment variable. e.g `FBCP_DISPLAY=adafruit-hx8357d-pitft`

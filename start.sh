@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/vc/lib
+
 if [ -z "${FBCP_DISPLAY}" ]
 then
    echo "WARNING: FBCP_DISPLAY variable not set."
