@@ -30,7 +30,7 @@ version: "2.1"
 
 services:
   fbcp:
-    image: bhcr.io/balenablocks/fbcp
+    image: bh.cr/balenablocks/fbcp
     privileged: true
   ...
 ```
