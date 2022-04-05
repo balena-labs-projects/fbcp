@@ -6,7 +6,7 @@ post-provisioning: |
     
     ```
     browser:
-      image: bhcr.io/balenablocks/fbcp 
+      image: bh.cr/balenablocks/fbcp 
       privileged: true 
     ```
   ### Configuring HDMI and TFT display sizes  
