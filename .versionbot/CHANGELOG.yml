@@ -1,0 +1,130 @@
+- commits:
+    - subject: renaming from balenablocks to balena-labs-projects
+      hash: 6e87482071363fd0fd9c3426ea121a220eeadf63
+      body: ""
+      footer:
+        Signed-off-by: Flynn Joffray <flynn@balena.io>
+        signed-off-by: Flynn Joffray <flynn@balena.io>
+        Change-type: patch
+        change-type: patch
+      author: Flynn Joffray
+      nested: []
+  version: 1.0.4
+  title: ""
+  date: 2022-11-15T20:04:53.984Z
+- version: 1.0.3
+  date: 2022-04-05T10:16:49Z
+  commits:
+    - hash: 54c3e76f63b029dd0f2c74290c9719283c6cd05f
+      author: Rahul Thakoor
+      subject: "patch: use bh.cr registry address"
+      body: null
+- version: 1.0.2
+- date: 2022-03-23T14:14:32Z
+- commits:
+    - hash: 1fadd9ce8ab3a7eb2287310fa3abff7679347941
+- commits:
+    - author: Rahul Thakoor
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Rahul Thakoor <rahul@balena.io>
+- commits:
+    - subject: Update to use fleet registry
+- commits:
+    - body: null
+- version: 1.0.1
+- date: 2021-03-09T11:41:17Z
+- commits:
+    - hash: a1a72be4485bbf5b17c8464960fc3b1e073dad5d
+- commits:
+    - author: Rahul Thakoor
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Rahul Thakoor <rahul@balena.io>
+- commits:
+    - subject: Fix balena.yml and document touch support
+- commits:
+    - body: null
+- version: 1.0.0
+- date: 2021-03-01T12:33:13Z
+- commits:
+    - hash: b24c87f8608559fb452fe9510f082470bfd90203
+- commits:
+    - author: Kyle Harding
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - footers:
+        signed-off-by: Kyle Harding <kyle@balena.io>
+- commits:
+    - subject: Generate one image with all display controllers
+- commits:
+    - body: |-
+        Avoid creating individual images for each display
+        controller and instead just create one image and require
+        that FBCP_DISPLAY is set.
+        This commit also includes support for the `dtoverlay`
+        display controller which is just the generic rpi-fbcp
+        that requires `BALENA_HOST_CONFIG_dtoverlay` for drivers.
+- commits:
+    - hash: 820c0732dbc60fa0eee9d820624f910d00701d14
+- commits:
+    - author: Kyle Harding
+- commits:
+    - footers:
+        signed-off-by: Kyle Harding <kyle@balena.io>
+- commits:
+    - subject: "fbcp: use rpi build image and busybox final image"
+- commits:
+    - body: Add support for Pi Zero by building against armv5.
+- version: 0.1.0
+- date: 2021-02-02T14:18:18Z
+- commits:
+    - hash: 59ac8526962516449b21cf7ab3c30486afdde546
+- commits:
+    - author: Rahul Thakoor
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Rahul Thakoor <rahul@balena.io>
+- commits:
+    - subject: Add metadata for balenaHub
+- commits:
+    - body: null
+- commits:
+    - hash: 771df5ed1a9731de81434a2e6c4ddf98382829b5
+- commits:
+    - author: Rahul Thakoor
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Rahul Thakoor <rahul@balena.io>
+- commits:
+    - subject: Add default configs
+- commits:
+    - body: null
+- commits:
+    - hash: 1c8208db099a80c99d3854d4d5f787229baf5fa9
+- commits:
+    - author: Rahul Thakoor
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - footers:
+        signed-off-by: Rahul Thakoor <rahul@balena.io>
+- commits:
+    - subject: Add repo.yml
+- commits:
+    - body: null
