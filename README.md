@@ -1,4 +1,4 @@
-# balenablocks/fbcp
+# fbcp (frame buffer copy)
 
 Provides `fbcp` driver for SPI based displays for Raspberry Pis via [fbcp-ili9341](https://github.com/juj/fbcp-ili9341)
 
@@ -23,14 +23,14 @@ fbcp-ili9341 [supports several displays](https://github.com/juj/fbcp-ili9341#whi
 
 `fbcp` is meant to be used alongside other services, so you will need to create a service in your `docker-compose.yml` file:
 
-So for example, if you are using `fbcp` with the Adafruit PiTFT - Assembled 480x320 3.5" TFT+Touchscreen along with the [dashboard](https://github.com/balenablocks/dashboard) and [browser](https://github.com/balenablocks/browser) blocks with a Raspberry Pi 3, you would use the following `docker-compose.yml` file
+So for example, if you are using `fbcp` with the Adafruit PiTFT - Assembled 480x320 3.5" TFT+Touchscreen along with the [dashboard](https://github.com/balena-labs-projects/dashboard) and [browser](https://github.com/balena-labs-projects/browser) blocks with a Raspberry Pi 3, you would use the following `docker-compose.yml` file
 
 ```yml
 version: "2.1"
 
 services:
   fbcp:
-    image: bh.cr/balenablocks/fbcp
+    image: bh.cr/balenalabs/fbcp
     privileged: true
   ...
 ```
