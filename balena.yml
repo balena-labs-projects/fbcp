@@ -6,7 +6,7 @@ post-provisioning: |
     
     ```
     browser:
-      image: bh.cr/balenablocks/fbcp 
+      image: bh.cr/balenalabs/fbcp 
       privileged: true 
     ```
   ### Configuring HDMI and TFT display sizes  
@@ -23,11 +23,11 @@ assets:
   repository:
     type: blob.asset
     data:
-      url: 'https://github.com/balenablocks/fbcp'
+      url: 'https://github.com/balena-labs-projects/fbcp'
   logo:
     type: blob.asset
     data:
-      url: 'https://raw.githubusercontent.com/balenablocks/fbcp/master/logo.png'
+      url: 'https://raw.githubusercontent.com/balena-labs-projects/fbcp/master/logo.png'
 data:
   applicationEnvironmentVariables:
     - FBCP_DISPLAY: ''
