@@ -1,4 +1,18 @@
 - commits:
+    - subject: Replace push script with flowzone docker publish
+      hash: 561c3651c86ddbe9ed85e0849a5e2098962cd61a
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 1.1.0
+  title: ""
+  date: 2023-05-11T14:48:37.024Z
+- commits:
     - subject: renaming from balenablocks to balena-labs-projects
       hash: 6e87482071363fd0fd9c3426ea121a220eeadf63
       body: ""
